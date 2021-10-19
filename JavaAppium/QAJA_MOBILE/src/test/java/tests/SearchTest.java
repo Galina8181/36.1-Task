@@ -15,6 +15,9 @@ import java.lang.reflect.MalformedParameterizedTypeException;
 
 public class SearchTest extends CoreTestCase {
 
+    public SearchTest() {
+    }
+
     @Test
     public void testFindJava() {
 
@@ -29,7 +32,7 @@ public class SearchTest extends CoreTestCase {
         );
         searchInit.click();
 
-        WebElement searchInput = mainPO.waitForElementPresent(
+       WebElement searchInput = mainPO.waitForElementPresent(
                 "id:org.wikipedia:id/search_src_text",
                 "Cannot find search input"
         );
@@ -41,14 +44,37 @@ public class SearchTest extends CoreTestCase {
         );
         expectedResult.click();
 
-       /*WebElement searchInputs = mainPO.waitForElementPresent(
-                "id:org.wikipedia:id/search_src_text",
-                "Cannot find search input"
+
+        //1 Нажать "х"
+        //2. Ввести текст "wfewfewfwegweg"
+
+        //3. проверить результат org.wikipedia:id/search_src_text
+
+         WebElement clickButton = mainPO.waitForElementPresent(
+                 "xpath://android.widget.ImageButton[@content-desc=\"Navigate up\"]",
+                 "Cannot find button"
+         );
+         clickButton.click();
+
+        WebElement againSearchInit = mainPO.waitForElementPresent(
+                "id:org.wikipedia:id/search_container",
+                "Cannot find Search Wikipedia againInit search input"
         );
-        searchInput.sendKeys("wfewfewfwegweg");
+        againSearchInit.click();
 
 
-*/
+        WebElement textInput = mainPO.waitForElementPresent(
+                "id:org.wikipedia:id/search_src_text",
+                "Cannot find search text"
+        );
+        textInput.sendKeys("wfewfewfwegweg");
 
+
+        WebElement checkResult = mainPO.waitForElementPresent(
+                "id:org.wikipedia:id/fragment_search_results",
+                "Cannot find result "
+        );
+             checkResult.getText();
     }
 }
+
